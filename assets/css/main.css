@@ -26,7 +26,7 @@ body {
     height: 100%;
 }
 .sea-bg {
-    background: url(/assets/image/PNG/Tiles/tile_73-75.png) repeat;
+    background: url(../image/PNG/Tiles/tile_73-75.png) repeat;
 }
 .compass {
     position: fixed;
