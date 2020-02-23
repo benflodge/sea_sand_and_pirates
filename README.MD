@@ -1,6 +1,9 @@
 # Sea, Sand and Pirates
 A simple JavaScript canvas pirate ship shooter game
 
+## Demo
+https://benflodge.github.io/sea_sand_and_pirates/
+
 ## Controls
 * Up - Sails Up
 * Down - Sails Down
