@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+            Sea & Sand
+        </title>
+        <link rel="stylesheet" href="assets/css/main.css">
+    </head>
+    <body>
+        <canvas class="playarea" id="sea-sand"></canvas>
+        <canvas class="playarea sea-bg" id="canvas"></canvas>
+        <div class="ui">
+            <div class="compass">
+                <div class="compass-n">N</div>
+                <div class="compass-w">W</div>
+                <div class="compass-e">E</div>
+                <div class="compass-s">S</div>
+                <canvas class="mini-map" id="map-canvas"></canvas>
+                <div class="compass-arrow">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 100" id="compass-arrow">
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7"
+                        refX="0" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" />
+                        </marker>
+                    </defs>
+                    <line x1="0" y1="50" x2="250" y2="50" stroke="rgba(185, 158, 35, 0.4)"
+                    stroke-width="8" marker-end="url(#arrowhead)" />
+                    </svg>
+                </div>
+            </div>
+            <ul class="controls" id="ui-controls">
+                <li id="audio-control" class="audio-icon">
+                    <img id="audio-control-audio-off" class="hidden" src="assets/image/ui/baseline-volume_off-24px.svg" alt="Sound off">
+                    <img id="audio-control-audio-on" src="assets/image/ui/baseline-volume_up-24px.svg" alt="Sound on">
+                </li>
+                <li id="help" class="help-icon">
+                    <img src="assets/image/ui/baseline-help_outline-24px.svg" alt="help">
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            <div id="help-popup" class="popup-modal hidden">
+                <div class="popup-content">
+                    <button id="help-close" class="help-close">X</button>
+                    <h1>Help</h1>
+                    <button id="start-game-button" class="button-play js-start-game">Restart Game</button>
+                    <h2>Controls</h2>
+                    <ul>
+                        <li>Up - Sails Up</li>
+                        <li>Down - Sails Down</li>
+                        <li>Left - Turn Port</li>
+                        <li>Right - Turn Starboard</li>
+                        <li>C - Cannon Port</li>
+                        <li>V - Cannon Starboard</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script>window.debug = false;</script>
+        <script type="text/javascript" src="./assets/libs/p2/p2.min.js"></script>
+        <script type="text/javascript" src="./assets/libs/noisejs/perlin.js"></script>
+        <script type="text/javascript" src="./assets/libs/pathfinding-browser/pathfinding-browser.min.js"></script>
+    <script type="text/javascript" src="main.js"></script></body>
+</html>
