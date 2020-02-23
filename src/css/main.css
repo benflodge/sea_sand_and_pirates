@@ -1,0 +1,154 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+html, body, canvas {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: rgba(21,108,153, 1);
+    font-family: 'TreasureMapDeadhand';
+    font-size: x-large;
+}
+
+.playarea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.sea-bg {
+    background: url(/assets/image/PNG/Tiles/tile_73-75.png) repeat;
+}
+.compass {
+    position: fixed;
+    top: 45px;
+    right: 45px;
+    color: rgb(119, 95, 0);
+    width: 150px;
+}
+
+.compass-n {
+    position: absolute;
+    top: -35px;
+    right: 70px;
+}
+
+.compass-e {
+    position: absolute;
+    top: 60px;
+    right: -25px;
+}
+
+.compass-s {
+    position: absolute;
+    top: 155px;
+    right: 72px;
+}
+
+.compass-w {
+    position: absolute;
+    top: 60px;
+    right: 165px;
+}
+
+.compass-arrow {
+    position: relative;
+    top: -95px;
+}
+
+#arrowhead {
+    fill: rgba(185, 158, 35, 0.3);
+    color: rgba(185, 158, 35, 0.3);
+}
+.content {
+    color: rgb(227, 198, 84);
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+.mini-map {
+    position: relative;
+    padding: 6px;
+    border: solid 6px rgba(185, 158, 35, 0.4);
+    background-color: rgba(255, 144, 0, 0.3);
+    border-radius: 50%;
+}
+
+.controls {
+    filter: invert(.5) sepia(1) saturate(5) hue-rotate(14deg);
+    position: fixed;
+    top: 200px;
+    right: 25px;
+    list-style: none;
+}
+
+.controls li {
+    padding: 5px;
+    fill: rgba(185, 158, 35, 0.4);
+}
+
+.popup-modal {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: #0000005c;
+    padding: 0;
+    margin: 0;
+}
+
+.popup-content {
+    min-width: 550px;
+    background: #000000a3;
+    padding: 0 50px;
+    border: #00b6ff8f 10px solid;
+    border-radius: 5px;
+}
+
+.button-play {
+    font-family: 'TreasureMapDeadhand';
+    border-radius: 12px;
+    font-size: 2.1em;
+    background: transparent;
+    color: #e3c654;
+    border: none;
+}
+.button-play:hover {
+    color: black;
+    background: #e3c654;
+}
+.help-close {
+    position: relative;
+    float: right;
+    top: 15px;
+    right: -25px;
+    font-family: 'TreasureMapDeadhand';
+    font-size: xx-large;
+    border: none;
+    background: none;
+    color: rgb(227, 198, 84);
+}
+.help-close:hover {
+    color: rgb(171, 136, 0);
+}
+
+.hidden {
+    display: none;
+}
+
+@font-face {
+    font-family: 'TreasureMapDeadhand';
+    src: url('../fonts/TreasureMapDeadhand.eot?#iefix') format('embedded-opentype'),  url('../fonts/TreasureMapDeadhand.woff') format('woff'), url('../fonts/TreasureMapDeadhand.ttf')  format('truetype'), url('../fonts/TreasureMapDeadhand.svg#TreasureMapDeadhand') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
