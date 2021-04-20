@@ -5,8 +5,8 @@ const addEvent = (function( window, document ) {
             if ( (elem && !elem.length) || elem === window ) {
                 elem.addEventListener(type, cb, false );
             } else if ( elem && elem.length ) {
-                var len = elem.length;
-                for ( var i = 0; i < len; i++ ) {
+                const len = elem.length;
+                for ( let i = 0; i < len; i++ ) {
                     addEvent( elem[i], type, cb );
                 }
             }
@@ -20,8 +20,8 @@ const addEvent = (function( window, document ) {
                 });
             }
             else if ( elem.length ) {
-                var len = elem.length;
-                for ( var i = 0; i < len; i++ ) {
+                const len = elem.length;
+                for ( let i = 0; i < len; i++ ) {
                     addEvent( elem[i], type, cb );
                 }
             }
@@ -42,7 +42,7 @@ function keyName(event) {
 
 function eventAction(event, keyDown) {
     event = event || window.event;
-    var charCode = event.charCode || event.keyCode;
+    const charCode = event.charCode || event.keyCode;
     event.preventDefault();
     if (charCode){
         return (keyDown[keyName(charCode)] = true);
@@ -51,7 +51,7 @@ function eventAction(event, keyDown) {
 
 function eventEnd(event, keyDown) {
     event = event || window.event;
-    var charCode = event.charCode || event.keyCode;
+    const charCode = event.charCode || event.keyCode;
     if (charCode){
         return (keyDown[keyName(charCode)] = false);
     }

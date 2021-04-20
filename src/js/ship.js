@@ -93,18 +93,20 @@ export default {
             return;
         }
 
-        var point = this.findRenderPoint();
+        const ctx = view.context;
 
-        view.context.save();
-        view.context.beginPath();
-        view.context.translate(
+        const point = this.findRenderPoint();
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.translate(
             utils.bitFloor(point[0] * 32 + view.viewport.x),
             utils.bitFloor(point[1] * 32 + view.viewport.y)
         );
 
-        view.context.rotate(this.getAngle());
+        ctx.rotate(this.getAngle());
 
-        view.context.drawImage(
+        ctx.drawImage(
             image,
             shipSprites.SubTexture[this.shipImageTile].x,
             shipSprites.SubTexture[this.shipImageTile].y,
@@ -117,14 +119,14 @@ export default {
         );
 
         if (window.debug) {
-            view.context.beginPath();
-            view.context.arc(0, 0, 1 * 32, 0, 2 * Math.PI);
-            view.context.stroke();
+            ctx.beginPath();
+            ctx.arc(0, 0, 1 * 32, 0, 2 * Math.PI);
+            ctx.stroke();
 
-            view.context.arc(0, 0, 192, 0, 2 * Math.PI);
-            view.context.stroke();
+            ctx.arc(0, 0, 192, 0, 2 * Math.PI);
+            ctx.stroke();
         }
-        view.context.restore();
+        ctx.restore();
 
         if (window.debug) {
             // Debug: draw a* path on mini map
@@ -150,14 +152,14 @@ export default {
                         element[1]
                     );
 
-                    view.context.save();
-                    view.context.translate(
+                    ctx.save();
+                    ctx.translate(
                         pos.x + 16 + view.viewport.x,
                         pos.y + 16 + view.viewport.y
                     );
-                    view.context.fillStyle = 'orange';
-                    view.context.fillRect(0, 0, 4, 4);
-                    view.context.restore();
+                    ctx.fillStyle = 'orange';
+                    ctx.fillRect(0, 0, 4, 4);
+                    ctx.restore();
                 }
             }
         }

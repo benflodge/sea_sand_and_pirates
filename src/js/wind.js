@@ -1,7 +1,7 @@
 /* global p2 */
 export default {
     create() {
-        var obj = Object.create(this);
+        const obj = Object.create(this);
         // obj.vector = new p2.vec2();
         obj.vector = p2.vec2.fromValues(0, 0.1);
 

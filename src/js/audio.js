@@ -23,7 +23,7 @@ export default {
     },
 
     loadSound(audioFiles, soundName) {
-        var request = new XMLHttpRequest();
+        const request = new XMLHttpRequest();
 
         request.open('GET', audioFiles[soundName].src, true);
         request.responseType = 'arraybuffer';
@@ -51,7 +51,7 @@ export default {
             this.audioContext.resume();
         }
 
-        var source = this.audioContext.createBufferSource();
+        let source = this.audioContext.createBufferSource();
         source.buffer = soundBuffer;
         source.connect(this.audioContext.destination);
         source.start(0);

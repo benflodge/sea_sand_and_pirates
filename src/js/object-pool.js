@@ -9,7 +9,7 @@ export default {
     collection: null,
 
     create (pooledObject) {
-        let obj = Object.create(this);
+        const obj = Object.create(this);
         obj.collection = [];
         obj.pooledObject = pooledObject;
         return obj;
@@ -36,7 +36,8 @@ export default {
 
     clean () {
         // Remove all unused objects from the pool except for 1
-        for (var i = 0; i < this.collection.length; i++) {
+        let i = 0
+        for (; i < this.collection.length; i++) {
             if(this.collection[i].isActive()){
                 break;
             }

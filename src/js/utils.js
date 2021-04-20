@@ -60,19 +60,19 @@ function angleTo(p1, p2) {
 }
 
 function distance(p0, p1) {
-    var dx = p1.position[0] - p0.position[0],
+    const dx = p1.position[0] - p0.position[0],
         dy = p1.position[1] - p0.position[1];
     return Math.sqrt(dx * dx + dy * dy);
 }
 
 function distanceXY(x0, y0, x1, y1) {
-    var dx = x1 - x0,
+    const dx = x1 - x0,
         dy = y1 - y0;
     return Math.sqrt(dx * dx + dy * dy);
 }
 
 function deltaAngle(current, target) {
-    var delta = target - current;
+    let delta = target - current;
 
     // Keep it in range from -180 to 180 to make the most efficient turns.
     if (delta > Math.PI) delta -= Math.PI * 2;
