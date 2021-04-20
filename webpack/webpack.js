@@ -22,7 +22,8 @@ module.exports = env => {
         entry: ['./js/index.js'],
         output: {
             path: path.resolve(workingDir, 'build', 'dist'),
-            filename: '[name].js',
+            filename: '[name].js', 
+            assetModuleFilename: 'assets/[hash][ext][query]'
         },
         plugins: [
             production ? new CleanWebpackPlugin() : () => {},
@@ -36,7 +37,8 @@ module.exports = env => {
                 template: 'index.ejs',
                 inject: true,
             }),
-            new CopyPlugin([
+            new CopyPlugin({
+                patterns: [
                 {
                     to: 'assets/audio/',
                     from: 'audio',
@@ -74,7 +76,7 @@ module.exports = env => {
                         'assets/libs/pathfinding-browser/pathfinding-browser.min.js',
                     toType: 'file',
                 },
-            ]),
+            ]}),
             // new BundleAnalyzerPlugin(),
             new ArchivePlugin({
                 output: path.resolve(workingDir, 'build', 'version'),
@@ -97,29 +99,11 @@ module.exports = env => {
                 },
                 {
                     test: /.(woff|woff2|eot|ttf|svg)$/i,
-                    use: [
-                        'file-loader?name=/assets/fonts/[hash].[ext]',
-                        {
-                            loader: 'image-webpack-loader',
-                            options: {
-                                publicPath: '/assets/fonts/',
-                                emitFile: false,
-                            },
-                        },
-                    ],
+                    type: 'asset/resource',
                 },
                 {
                     test: /.(gif|png|jpe?g)$/i,
-                    use: [
-                        'file-loader?name=/assets/images/[hash].[ext]',
-                        {
-                            loader: 'image-webpack-loader',
-                            options: {
-                                publicPath: '/assets/images/',
-                                emitFile: false,
-                            },
-                        },
-                    ],
+                    type: 'asset/resource',
                 },
             ],
         },
