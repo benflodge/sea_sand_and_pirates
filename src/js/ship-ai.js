@@ -75,12 +75,7 @@ export default {
             this.path = window.path = null;
         }
 
-        if (this.lineOfSight || (this.path && this.path.length <= 1)) {
-            // Only use path to get back to LOS
-        }
-
         // Critical systems - dont crash into the world or other ships
-
         // *near* is one ships distance
 
         // if near land turn port side

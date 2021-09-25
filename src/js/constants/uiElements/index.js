@@ -14,6 +14,13 @@ export default [
     'help',
     'help-popup',
     'help-close',
+    'restart-game-button',
+    'start-popup',
     'start-game-button',
+    'start-game-seed',
     'ui-controls',
+    'game-over-popup',
+    'try-again-button',
+    'win-popup',
+    'new-game-button',
 ];

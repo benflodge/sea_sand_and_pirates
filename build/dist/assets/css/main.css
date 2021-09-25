@@ -110,7 +110,7 @@ body {
 .popup-content {
     min-width: 550px;
     background: #000000a3;
-    padding: 0 50px;
+    padding: 0 50px 20px;
     border: #00b6ff8f 10px solid;
     border-radius: 5px;
 }
@@ -123,10 +123,12 @@ body {
     color: #e3c654;
     border: none;
 }
+
 .button-play:hover {
     color: black;
     background: #e3c654;
 }
+
 .help-close {
     position: relative;
     float: right;
@@ -138,8 +140,16 @@ body {
     background: none;
     color: rgb(227, 198, 84);
 }
+
 .help-close:hover {
     color: rgb(171, 136, 0);
+}
+
+.seed-input {
+    background: #202f34;
+    border: #0d7aa5 1px solid;
+    color: #e3c654;
+    padding: 3px;
 }
 
 .hidden {

@@ -17,6 +17,11 @@ function bindKeyboardEvents() {
     });
 }
 
+function showHelp(view) {
+    view.uiElements.helpPopup.classList.toggle('hidden');
+    view.currentGame && view.currentGame.stop();
+}
+
 function bindUiControls(view) {
     events.addEvent(view.uiElements.uiControls, 'click', evt => {
         switch (evt.target.parentElement) {
@@ -29,8 +34,7 @@ function bindUiControls(view) {
                 break;
 
             case view.uiElements.help:
-                view.uiElements.helpPopup.classList.toggle('hidden');
-                view.currentGame.stop();
+                showHelp(view);
                 break;
         }
     });
@@ -64,20 +68,76 @@ function toggleSoundButton(view, isEnabled, soundType) {
     }
 }
 
+function toggleMenu(view) {
+    view.uiElements.startPopup.classList.toggle('hidden');
+}
+
+function bindStartPopupModal(view) {
+    events.addEvent(view.uiElements.startPopup, 'click', evt => {
+        switch (evt.target) {
+            case view.uiElements.startGameButton:
+                toggleMenu(view);
+                const seed = view.uiElements.startGameSeed.valueAsNumber;
+                view.startGame(seed >= 0 || seed <= 65536 ? seed : 0);
+                break;
+        }
+    });
+
+    view.ui.toggleMenu = () => toggleMenu(view)
+}
+
 function bindHelpPopupModal(view) {
     events.addEvent(view.uiElements.helpPopup, 'click', evt => {
         switch (evt.target) {
             case view.uiElements.helpPopup:
             case view.uiElements.helpClose:
                 view.uiElements.helpPopup.classList.toggle('hidden');
-                view.currentGame.run();
+                view.currentGame && view.currentGame.run();
                 break;
-            case view.uiElements.startGameButton:
+            case view.uiElements.restartGameButton:
                 view.uiElements.helpPopup.classList.toggle('hidden');
-                view.startGame();
+                view.ui.toggleMenu();
                 break;
         }
     });
+
+    view.ui.pause = () => showHelp(view);
+}
+
+function toggleGameOverPopup(view) {
+    view.currentGame && view.currentGame.stop();
+    view.uiElements.gameOverPopup.classList.toggle('hidden');
+}
+
+function bindGameOverPopupModal(view) {
+    events.addEvent(view.uiElements.gameOverPopup, 'click', evt => {
+        switch (evt.target) {
+            case view.uiElements.tryAgainButton:
+                toggleGameOverPopup(view);
+                view.ui.toggleMenu();
+                break;
+        }
+    });
+
+    view.ui.gameOver = () => toggleGameOverPopup(view);
+}
+
+function toggleWinPopup(view) {
+    view.currentGame && view.currentGame.stop();
+    view.uiElements.winPopup.classList.toggle('hidden');
+}
+
+function bindWinPopupModal(view) {
+    events.addEvent(view.uiElements.winPopup, 'click', evt => {
+        switch (evt.target) {
+            case view.uiElements.newGameButton:
+                toggleWinPopup(view);
+                view.ui.toggleMenu();
+                break;
+        }
+    });
+
+    view.ui.winGame = () => toggleWinPopup(view);
 }
 
 export default function setupView() {
@@ -97,11 +157,13 @@ export default function setupView() {
         window.innerWidth);
 
     const sfx = audioSfx.create();
+    const ui = {};
 
     const view = {
         keyDown,
         sfx,
         uiElements,
+        ui,
         seaContext,
         context,
         mapContext,
@@ -114,7 +176,10 @@ export default function setupView() {
 
     bindKeyboardEvents();
     bindUiControls(view);
+    bindStartPopupModal(view);
     bindHelpPopupModal(view);
+    bindGameOverPopupModal(view);
+    bindWinPopupModal(view);
 
     return view;
 }

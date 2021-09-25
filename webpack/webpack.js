@@ -13,6 +13,11 @@ module.exports = env => {
     const production = !!(env && env.production);
 
     return {
+        watch: !production,
+        watchOptions: {
+            aggregateTimeout: 200,
+            poll: 1000,
+        },
         mode: production ? 'production' : 'development',
         context: path.resolve(workingDir, 'src'),
         resolve: {
@@ -29,10 +34,10 @@ module.exports = env => {
             production ? new CleanWebpackPlugin() : () => {},
             new WEBPACK.DefinePlugin({
                 __PRODUCTION__: true,
-                'process.env.NODE_ENV': JSON.stringify('production'),
+                'process.env.NODE_ENV': '"production"',
             }),
             new HTML({
-                title: 'Sea & Sand',
+                title: 'Sea, Sand & Pirates',
                 filename: 'index.html',
                 template: 'index.ejs',
                 inject: true,
@@ -80,8 +85,6 @@ module.exports = env => {
             // new BundleAnalyzerPlugin(),
             new ArchivePlugin({
                 output: path.resolve(workingDir, 'build', 'version'),
-                // output archive filename, defaults to the Webpack output filename (above),
-                // if not present, use the basename of the path
                 // filename: name + "-" + APP_VERSION,
                 format: 'tar',
             }),

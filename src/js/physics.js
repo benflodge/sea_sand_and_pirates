@@ -23,6 +23,7 @@ export function update(view, frameDuration, deltaTime, maxSubSteps, timeStamp) {
 
     physics.timeStamp = timeStamp;
 
+
     // const ships = actors.enemyShips.concat([actors.playerShip]);
     // var windForce = p2.vec2.create();
     // for(let i = 0; i < ships.length; i++){
@@ -42,17 +43,32 @@ export function update(view, frameDuration, deltaTime, maxSubSteps, timeStamp) {
 
 function postStep(view) {
     const { game } = view;
+
+    let enemyCount = 0
     game.actors.enemyShips.forEach(ship => {
-        ship.makeMove(
-            view,
-            game.actors.playerShip,
-            game.physics.timeStamp,
-            game.actors.cannonBalls,
-            game.aStarGraph
-        );
+        if (ship.isActive()) {
+            ship.makeMove(
+                view,
+                game.actors.playerShip,
+                game.physics.timeStamp,
+                game.actors.cannonBalls,
+                game.aStarGraph
+            );
+            enemyCount ++;
+        }
     });
 
-    game.actors.playerShip.makeMove(view, game);
+    if (game.actors.playerShip.isActive()) {
+        game.actors.playerShip.makeMove(view, game);
+    } else {
+        view.ui.gameOver();
+        return;
+    }
+
+    if(enemyCount == 0) {
+        view.ui.winGame();
+        return;
+    }
 }
 
 function beginContact(evt, view) {
@@ -83,6 +99,6 @@ function beginContact(evt, view) {
     } else if (thingB.type === SHIP && thingA.type === WALL) {
         thingB.damageHull(view, 50);
     } else {
-        // do nothing no one cares
+        // do nothing - no one cares
     }
 }

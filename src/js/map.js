@@ -3,9 +3,9 @@ import * as constants from './constants';
 import { bitFloor } from './utils';
 
 export const WALL = 'wall';
-export default function createGameMap(view) {
+export default function createGameMap(view, seed) {
     const { game } = view;
-    game.map = createMap(constants.mapSize, constants.mapSize);
+    game.map = createMap(constants.mapSize, constants.mapSize, seed);
     game.mapForImages = parseMapForImages(game.map);
     game.tileMapValues = findTileMapValues(game.mapForImages);
     game.aStarGraph = new PF.Grid(game.map);
@@ -17,9 +17,9 @@ const LAND = 1;
 const SHALLOW_WATER = 99;
 const WATER = null;
 
-function createMap(width, height) {
-    window.noise.seed();
-    // window.noise.seed(Math.random());
+function createMap(width, height, seed = 0) {
+
+    window.noise.seed(typeof seed === 'number' ? seed : 0);
 
     const map = [];
     for (let x = 0; x < width; x += constants.res) {

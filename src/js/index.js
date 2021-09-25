@@ -7,9 +7,7 @@ import draw from './draw';
 import createGameMap from './map';
 import loadAssets from './assets';
 
-const view = setupView();
-
-function startGame() {
+function startGame(seed) {
     view.game = {
         physics: null,
         map: null,
@@ -17,7 +15,7 @@ function startGame() {
     };
 
     startPhysics(view);
-    createGameMap(view);
+    createGameMap(view, seed);
     createGameActors(view);
 
     const currentGame = (view.currentGame = gameLoop.create(
@@ -28,6 +26,7 @@ function startGame() {
     currentGame.run();
 }
 
+const view = setupView();
 view.startGame = startGame;
 
-loadAssets(view).then(startGame);
+loadAssets(view).then(view.ui.toggleMenu);

@@ -43,7 +43,7 @@ function keyName(event) {
 function eventAction(event, keyDown) {
     event = event || window.event;
     const charCode = event.charCode || event.keyCode;
-    event.preventDefault();
+    //event.preventDefault();
     if (charCode){
         return (keyDown[keyName(charCode)] = true);
     }

@@ -22,13 +22,12 @@ export default function draw(view, timeStamp) {
         );
     }
 
-    view.uiElements.canvas.style = `background-position-x: ${utils.bitFloor(
+    view.uiElements.canvas.style = `background-position: ${utils.bitFloor(
         view.viewport.x
-    ) % constants.imageTileSize}px; background-position-y: ${utils.bitFloor(
+    ) % constants.imageTileSize}px ${utils.bitFloor(
         view.viewport.y
     ) % constants.imageTileSize}px;`;
 
-    // Clear context
     view.context.clearRect(0, 0, view.width, view.height);
 
     drawMap(view, game.tileMapValues, view.assets);
